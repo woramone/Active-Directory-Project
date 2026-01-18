@@ -123,7 +123,8 @@ cd bin
 ```
 sudo ./splunk enable boot-start -user splunk
 ```
-
+- Now we go to Windows 11, rename to "Target-Win11"
+- Set static IP address according to our diagram
 
 
 
