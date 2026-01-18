@@ -36,7 +36,7 @@
 ```
 sudo nano /etc/netplan/50-cloud-init.yaml
 ```
-
+- Add input according to our diagram
 ![3](https://github.com/user-attachments/assets/8f0ea9d0-b4d0-4aa8-8a5f-a9f872b9ccf3)
 
 - Save and exit then type in
@@ -49,7 +49,18 @@ ip a
 - We should see the IP address 192.168.100.22/24
 - Check the internet activity by ping to google.com
 
-- We now will download Splunk for Linux (.deb) 
+- We now will download Splunk for Linux (.deb) on Splunk website
+- Install add-ons for Ubuntu Linux
+```
+sudo apt-get install virtualbox-guest-additions-iso
+```
+>[!NOTE]
+>I have encountered some issues during this step, so I have to tpye in
+> ````
+> sudo apt update
+> sudo apt install build-essential dkms linux-headers-$(uname -r)
+> ````
+
 
 
 
