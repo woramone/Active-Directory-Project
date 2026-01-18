@@ -37,6 +37,22 @@
 sudo nano /etc/netplan/50-cloud-init.yaml
 ```
 
+![3](https://github.com/user-attachments/assets/8f0ea9d0-b4d0-4aa8-8a5f-a9f872b9ccf3)
+
+- Save and exit then type in
+```
+sudo netplan apply
+```
+```
+ip a
+```
+- We should see the IP address 192.168.100.22/24
+- Check the internet activity by ping to google.com
+
+- We now will download Splunk for Linux (.deb) 
+
+
+
 
 
 
