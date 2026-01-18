@@ -55,12 +55,74 @@ ip a
 sudo apt-get install virtualbox-guest-additions-iso
 ```
 >[!NOTE]
->I have encountered some issues during this step, so I have to tpye in
+>I have encountered some issues during this step, so I have to tpye in below commands before
 > ````
 > sudo apt update
 > sudo apt install build-essential dkms linux-headers-$(uname -r)
+> sudo reboot
 > ````
 
+- Click on "Devices" at the top > Shared Folders Settings > Click add icon on the right > Add folder path where we downloaded Splunk for Linux (.deb) > Selected read-only, auto mount, make permanent > Ok
+
+- On Splunk server virtual machine
+- Type in
+```
+sudo apt-get install virtualbox-guest-utils
+```
+```
+sudo reboot
+```
+```
+sudo adduser <user_name> vboxsf
+```
+- Next, we will create a new directory called "share"
+```
+mkdir share
+```
+- Mount our shared folder onto our "share" directory
+```
+sudo mount -t vboxsf -o uid=1000,gid=1000 <Your_share_folder_path> share/
+```
+```
+ls -la
+```
+- We should see our share directory highlighed
+![4](https://github.com/user-attachments/assets/153997e2-c2d1-4643-b452-7a81ff97570f)
+
+- Go to share folder and type in
+```
+ls -la
+```
+```
+sudo dpkg -i <splunk_file>
+```
+- After completed install Splunk now we go to Splunk directory onto our server
+```
+cd /opt/splunk
+```
+- Chage into user splunk by typing in
+```
+sudo -u splunk bash
+```
+```
+cd bin
+````
+- Change directory to /bin then start to run the installer
+```
+./splunk start
+```
+- We'll get a license and terms agreements, we can go to last page and type in y to accept
+- Login with username and password
+- To make sure every time Splunk starts up everytime our virtual machine reboot
+````
+exit
+````
+```
+cd bin
+```
+```
+sudo ./splunk enable boot-start -user splunk
+```
 
 
 
@@ -69,9 +131,4 @@ sudo apt-get install virtualbox-guest-additions-iso
 
 
 
-
-
-
-
-Credit : Thanks <a href="https://www.youtube.com/@MyDFIR">MyDFIR</a> <a href="https://www.youtube.com/watch?v=-8X7Ay4YCoA&list=PLG6KGSNK4PuBWmX9NykU0wnWamjxdKhDJ&index=4">Learning video</a>
-
+Credit : Thanks <a href="https://www.youtube.com/@MyDFIR">MyDFIR</a> 
