@@ -143,22 +143,51 @@ sudo ./splunk enable boot-start -user splunk
 ```
 - Now we go to Windows 11, rename to "Target-Win11"
 - Set static IP address according to our diagram
-> IP address 192.168.100.50
-> Subnet mask 255.255.255.0
-> Default gateway 192.168.100.1
+- IP address: `192.168.100.50`
+- Subnet mask: `255.255.255.0`
+- Default gateway: `192.168.100.1`
 
 - Go to Splunk website and download "Splunk Universal Forwarder" for windows 11 
 > [!NOTE]
 > The details on install Splunk and Sysmon, follow along <a href="https://www.youtube.com/watch?v=uXRxoPKX65Q">HERE</a> from 12.50 minutes
 
 - We have to install and configure Windows Server with both Splunk&Sysmon
-> Computer name: ADDC-01
-> IP address: 192.168.100.40
-> Subnet mask: 255.255.255.0
-> Default gateway: 192.168.100.1
+- Computer name: `ADDC-01`
+- IP address: `192.168.100.40`
+- Subnet mask: `255.255.255.0`
+- Default gateway: `192.168.100.1`
 
 - If we have everything set correctly, we should see 2 hosts when we search on Splunk 192.168.100.22:8000 > Search & report > index="endpoint"
 
+- Next, we are going to install and configure Active Directory on Windows Server 2022 then promote it to a domain controller
+- Follow along <a href="https://www.youtube.com/watch?v=1XeDht_B-bA">Here</a>
+- In my case I called Root domain name "projectad.local"
+> [!NOTE]
+> The domain name must have a top level domain. Example:<name.somgthing>
+
+- After this, we will create user <a href="https://www.youtube.com/watch?v=1XeDht_B-bA">Here</a> from 5.10 minutes
+
+![5](https://github.com/user-attachments/assets/2aa8ff29-f66e-4c96-b166-0ca9214c17e9)
+> [!NOTE]
+> In Active Directory Users and Computers (ADUC), where we can  create, manage, > and delete users, computers, and groups, organize them into Organizational
+> Units (OUs), set permissions and security policies, reset passwords, manage
+> group memberships, and delegate control, essentially handling most day-to-day > administrative tasks for network identity and access. It's a graphical tool
+> (MMC snap-in) for centralized management of domain resources
+
+- Right click on projectad.local > New > Organizational Unit > name it "IT"
+- Inside this unit, right click > New > User
+- First name: `Anna`
+- Last name: `Brown`
+- User logon name: `abrown`
+
+- Create another unit as "HR" and a user in this unit
+- First name: `John`
+- Last name: `Green`
+- User logon name: `jgreen`
+> [!NOTE]
+> Unchecked "User must change password at next logon" since we are in lab environment
+
+- Now we have our Active Directory set up and our server is now a Domain Controller, we will go to Windows 11 and join to the `projectad.local` domain by using `Anna Brown` account
 
 
 
