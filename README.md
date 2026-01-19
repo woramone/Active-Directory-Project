@@ -19,7 +19,8 @@
 
 ## Steps
 
-<img width="710" height="810" alt="Active Directory Project drawio" src="https://github.com/user-attachments/assets/4e11b776-e3f5-427d-8db9-4d9bba9725c7" />
+
+<img width="710" height="810" alt="AD drawio" src="https://github.com/user-attachments/assets/1448af4b-f25b-4cda-9aa5-2a9813012936" />
 
 - Use draw.io to draw lab diagram for this Project
 - Set up VirtualBox and Install Kali Linux (Attacker machine), Windows11(Target machine), Windows Server 2022(Active Directory), Ubuntu Server(Splunk server)
@@ -125,8 +126,21 @@ sudo ./splunk enable boot-start -user splunk
 ```
 - Now we go to Windows 11, rename to "Target-Win11"
 - Set static IP address according to our diagram
+> IP address 192.168.100.50
+> Subnet mask 255.255.255.0
+> Default gateway 192.168.100.1
 
+- Go to Splunk website and download "Splunk Universal Forwarder" for windows 11 
+> [!NOTE]
+> The details on install Splunk and Sysmon, follow along <a href="https://www.youtube.com/watch?v=uXRxoPKX65Q">HERE</a> from 12.50 minutes
 
+- We have to install and configure Windows Server with both Splunk&Sysmon
+> Computer name: ADDC-01
+> IP address: 192.168.100.40
+> Subnet mask: 255.255.255.0
+> Default gateway: 192.168.100.1
+
+- If we have everything set correctly, we should see 2 hosts when we search on Splunk 192.168.100.22:8000 > Search & report > index="endpoint"
 
 
 
