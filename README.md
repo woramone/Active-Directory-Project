@@ -2,20 +2,37 @@
 
 ## Objective
 
-<!-- The Basic Home Labs Project is an initiative focused on hands-on experimentation using simple, cost-effective home laboratory environments. The project aims to design and deploy controlled test systems to generate and collect system, network, and security telemetry, enabling the analysis and detection of malware behavior on a target machine. -->
+To build and secure an Active Directory lab environment while simulating real-world cyberattacks and monitoring them using a SIEM solution. The project focuses on hands-on experience with domain administration, attack detection, log analysis, and security monitoring in a controlled virtual lab.
+
  
 ### Skills Learned
 
-<!-- - Learning how to set up and configuration on home lab environments
-- Detecting malicious activity using telemetry and security indicators
-- Using SIEM and log analysis tools to correlate events across data sources -->
+- Installation and configuration of Active Directory Domain Services (AD DS)
+- Creating and managing users, groups, and organizational units (OUs)
+- Domain controller and DNS configuration
+- Implementing Group Policy Objects (GPOs) for security enforcement
+- Joining Windows client machines to the domain
+- Monitoring Windows security logs and domain activity
+- Simulating attacks using Kali Linux tools
+- Detecting and analyzing malicious activity using Splunk SIEM
+- Log forwarding and event correlation
+- Understanding Active Directory attack techniques and defense strategies
+- Basic incident detection and response workflow
+- Troubleshooting AD, DNS, and logging issues
 
 
 ### Tools Used
 
-<!-- - Nmap (Network Mapper), find open ports/services, identify operating systems, and detect vulnerabilities by sending specially crafted packets to targets and analyzing responses.
-- Create Payload Using Msfvenom
-- Security Information and Event Management (SIEM) system for log ingestion and analysis. -->
+- Windows Server 2022 – Domain Controller
+- Active Directory Domain Services (AD DS)
+- Group Policy Management Console (GPMC)
+- DNS Manager
+- PowerShell (Active Directory administration)
+- Kali Linux – Attacker virtual machine
+- Ubuntu Server – Splunk Enterprise SIEM
+- Splunk Universal Forwarder
+- Windows 11 – Domain-joined client machines
+- VirtualBox
 
 ## Steps
 
