@@ -220,7 +220,29 @@ sudo apt-get install -y crowbar
 > using 1 thread.
 
 - We will use a popular word list called "Rockyou" that come with Kali Linux
-- Go to `cd /usr/share/wordlists/`
+- Go to `cd /usr/share/wordlists/` then when you type `ls` you should see a file called `rockyou.txt.gz`
+- Unzip it `sudo gunzip rockyou.txt.gz` now we have `rockyou.txt` file
+- We now copy this to our directory
+```
+cp rockyou.txt ~/Desktop/AD-Project
+```
+```
+cd ~/Desktop/AD-Project
+````
+- In this project we will use only first 20 lines of "rockyou.txt"
+```
+head -n 20 rockyou.txt > passwords.txt
+````
+- Let's pretend we know a certain password of our target
+ ````
+nano passwords.txt
+````
+- Add a certain password at the bottom > save it
+
+![6](https://github.com/user-attachments/assets/5156d12a-7fb3-47f0-a76e-b349369c3482)
+
+- Before we launch our attack, go to Target machine to enable "Remote Desktop"
+- Go to "Advance system settings" > login with admintrator and password > Remote tab > Selected "Allow remote connections to this computer" > Select Users... > Add... > in my case I made 2 users `Anna Brown` `John Green`
 
 
 
