@@ -193,6 +193,34 @@ sudo ./splunk enable boot-start -user splunk
 - Search for `Advance System Settings` > choose Computer Name tab > Change > selected Domain > type in `PROJECTAD.LOCAL` > Reboot
 - Login as `abrown` by selected "Other user"
 
+- Next, we will use Kali Linux to perform a Brute Force attack onto users
+- Then we will use Splunk to view telemetry for this activity
+- Set up and install Atomic Redteam to run a test
+
+- First, set Kali to
+- IP: `192.168.100.85`
+- Network: `24`
+- Gateway: `192.168.100.1`
+- DNS servers: `8.8.8.8`
+
+- Update and upgrade our repositories by type in
+```
+sudo apt-get update && sudo apt-get upgrade -y
+```
+- Setting up our attack by first create a new directory called `AD-Project`
+```
+mkdir AD-Project
+```
+- We will use "Crowbar" tool for attacking
+```
+sudo apt-get install -y crowbar
+```
+> [!NOTE]
+> Crowbar is a Brute forcing tool, Brute force the RDP service on a single host with a specified username and wordlist,
+> using 1 thread.
+
+- We will use a popular word list called "Rockyou" that come with Kali Linux
+- Go to `cd /usr/share/wordlists/`
 
 
 
