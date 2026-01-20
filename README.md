@@ -189,6 +189,10 @@ sudo ./splunk enable boot-start -user splunk
 
 - Now we have our Active Directory set up and our server is now a Domain Controller, we will go to Windows 11 and join to the `projectad.local` domain by using `Anna Brown` account
 
+- Head to Windows 11 (Target machine) by keep the AD machine running and change "Preferred DNS server" to domain controller `192.168.100.40` > OK
+- Search for `Advance System Settings` > choose Computer Name tab > Change > selected Domain > type in `PROJECTAD.LOCAL` > Reboot
+- Login as `abrown` by selected "Other user"
+
 
 
 
