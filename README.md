@@ -244,6 +244,21 @@ nano passwords.txt
 - Before we launch our attack, go to Target machine to enable "Remote Desktop"
 - Go to "Advance system settings" > login with admintrator and password > Remote tab > Selected "Allow remote connections to this computer" > Select Users... > Add... > in my case I made 2 users `Anna Brown` `John Green`
 
+- Back to Kali, we will use Crowbar as a tool to perform brute force attack
+
+```
+crowbar -h
+```
+- To see what options available for us, in our case we will use..
+```
+crowbar -b rdp -u abrown -C passwords.txt -s 192.168.100.50/32
+```
+> [!NOTE]
+> CIDR notation /32 specifies a single, unique IPv4 address, meaning all 32 bits of the address are fixed for the network portion, leaving zero bits for hosts, effectively creating a
+> "host route" for one specific device, preventing communication with other devices on the same subnet, often used for loopbacks or security isolation
+
+- 
+
 
 
 Credit : Thanks <a href="https://www.youtube.com/@MyDFIR">MyDFIR</a> 
