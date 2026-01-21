@@ -33,6 +33,7 @@ To build and secure an Active Directory lab environment while simulating real-wo
 - Splunk Universal Forwarder
 - Windows 11 – Domain-joined client machines
 - VirtualBox
+- Atomic RedTeam
 
 ## Steps
 
@@ -257,7 +258,7 @@ crowbar -b rdp -u abrown -C passwords.txt -s 192.168.100.50/32
 > CIDR notation /32 specifies a single, unique IPv4 address, meaning all 32 bits of the address are fixed for the network portion, leaving zero bits for hosts, effectively creating a
 > "host route" for one specific device, preventing communication with other devices on the same subnet, often used for loopbacks or security isolation
 
-( SHOW SCREEN SHOT OF RESULT OF SUCCESSFUL BRUTE FORCE)
+<!--( SHOW SCREEN SHOT OF RESULT OF SUCCESSFUL BRUTE FORCE)-->
 
 - We now go to Splunk and see what telemetry we have generated
 - Select "Search & Reporting"
@@ -276,5 +277,34 @@ index="endpoint" abrown
 
 - As we expected, because we made a list of `passwords.txt` that contain 21 passwords that the last one is the correct one
 - If we look closely at the event, each of them happened at the same time which can be clear indication of Brute Force activity
+
+- Next we will install Atomic Red Team on our target machine then we can run some test on it
+- Open up PowerShell with administrator privileges
+
+```
+Set-ExecutionPolicy Bypass CurrentUser
+```
+- Before install, let's set an exclusion fir the entire C: as Microsoft Defender will detect and remove some of the files from Atomic red team
+- Go to "Virus & threat protection" > manage settings > Click "Add or remove exclusions" > Select "Folder" > Select C drive
+
+- Atomic Red Team Powershell Command:
+```
+IEX (IWR  -UseBasicParsing);
+Install-AtomicRedTeam -getAtomics
+```
+- Then press Y and hit enter to install the dependencies
+- After that go to C: > Atomic RedTeam > atomics
+- Inside we will see a bunch of technique IDs and these map back to MITRE ATT&CK framework
+- Try with `T1136.001` " Create Account: Local Account"
+- To use the command we type in..
+```
+Invoke-AtomicTest T1136.001
+```
+- This will automatically generate telemetry based on "Create local account"
+<!--Add pic-->
+
+- Go to Splunk and try to check the events
+> [!NOTE]
+> Meaning we can build alerts to detect on this activity in the future
 
 Credit : Thanks <a href="https://www.youtube.com/@MyDFIR">MyDFIR</a> 
