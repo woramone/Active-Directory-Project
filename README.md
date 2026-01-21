@@ -257,8 +257,24 @@ crowbar -b rdp -u abrown -C passwords.txt -s 192.168.100.50/32
 > CIDR notation /32 specifies a single, unique IPv4 address, meaning all 32 bits of the address are fixed for the network portion, leaving zero bits for hosts, effectively creating a
 > "host route" for one specific device, preventing communication with other devices on the same subnet, often used for loopbacks or security isolation
 
-- 
+( SHOW SCREEN SHOT OF RESULT OF SUCCESSFUL BRUTE FORCE)
 
+- We now go to Splunk and see what telemetry we have generated
+- Select "Search & Reporting"
+- We know that our attack is occurred within the past 15 minutes and knew the target, let's narrow down our search to find the events related to "abrown"
 
+```
+index="endpoint" abrown
+````
+- Look at the `EventCode` we will see `4625` event count as `20`
+> [!NOTE]
+> 4625(F): An account failed to log on.
+
+- And `4624` event count as `1`
+> [!NOTE]
+> 4624(S): An account was successfully logged on.
+
+- As we expected, because we made a list of `passwords.txt` that contain 21 passwords that the last one is the correct one
+- If we look closely at the event, each of them happened at the same time which can be clear indication of Brute Force activity
 
 Credit : Thanks <a href="https://www.youtube.com/@MyDFIR">MyDFIR</a> 
