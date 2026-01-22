@@ -1,4 +1,4 @@
-# Active-Directory-Project
+# Active Directory Project
 
 ## Objective
 
@@ -40,16 +40,18 @@ To build and secure an Active Directory lab environment while simulating real-wo
 
 <img width="710" height="810" alt="AD drawio" src="https://github.com/user-attachments/assets/1448af4b-f25b-4cda-9aa5-2a9813012936" />
 
-- Use draw.io to draw lab diagram for this Project
+### Set up and configuration on home lab environments
+
 - Set up VirtualBox and Install Kali Linux (Attacker machine), Windows11(Target machine), Windows Server 2022(Active Directory), Ubuntu Server(Splunk server)
 > Learn how to install all of them from [here](https://www.youtube.com/watch?v=2cEj3bS5C0Q)
 
 ![2](https://github.com/user-attachments/assets/13bc7151-2104-47c7-9225-777b93ebf80c)
 
 - Set up NAT Network for our VMs to have the internet access and put them in the same network
-- Go to VirtualBox > Tools(bullet point) > Network > NAT Networks(Tab) > click Create > At the bottom put the name of the network you want, in my case is "AD-Project" > IPv4 Prefix set according to the diagram we created (in my case is 192.168.100.0/24) > Click Apply
+- Go to VirtualBox > Tools(bullet point) > Network > NAT Networks(Tab) > click Create > At the bottom put the name of the network you want, in my case is "AD-Project" > IPv4 Prefix set according to the diagram we created (in my case is `192.168.100.0/24`) > Click Apply
 - Go to each machine and change Network to "NAT Network" also "AD-Project" we have created
 
+### Installing Splunk SIEM on Ubuntu
 - Open our Splunk server(Ubuntu server)
 - Type in 
 ```
@@ -142,6 +144,9 @@ cd bin
 ```
 sudo ./splunk enable boot-start -user splunk
 ```
+
+### Splunk Universal Forwarder on a Windows machine & Sysmon
+
 - Now we go to Windows 11, rename to "Target-Win11"
 - Set static IP address according to our diagram
 - IP address: `192.168.100.50`
@@ -160,6 +165,8 @@ sudo ./splunk enable boot-start -user splunk
 
 - If we have everything set correctly, we should see 2 hosts when we search on Splunk 192.168.100.22:8000 > Search & report > index="endpoint"
 
+ ### Installation and configuration of Active Directory Domain Services
+
 - Next, we are going to install and configure Active Directory on Windows Server 2022 then promote it to a domain controller
 - Follow along <a href="https://www.youtube.com/watch?v=1XeDht_B-bA">Here</a>
 - In my case I called Root domain name "projectad.local"
@@ -174,6 +181,8 @@ sudo ./splunk enable boot-start -user splunk
 > Units (OUs), set permissions and security policies, reset passwords, manage
 > group memberships, and delegate control, essentially handling most day-to-day > administrative tasks for network identity and access. It's a graphical tool
 > (MMC snap-in) for centralized management of domain resources
+
+### Creating and managing users, groups, and organizational units (OUs)
 
 - Right click on projectad.local > New > Organizational Unit > name it "IT"
 - Inside this unit, right click > New > User
@@ -190,6 +199,8 @@ sudo ./splunk enable boot-start -user splunk
 
 - Now we have our Active Directory set up and our server is now a Domain Controller, we will go to Windows 11 and join to the `projectad.local` domain by using `Anna Brown` account
 
+### Joining Windows client machines to the domain
+
 - Head to Windows 11 (Target machine) by keep the AD machine running and change "Preferred DNS server" to domain controller `192.168.100.40` > OK
 - Search for `Advance System Settings` > choose Computer Name tab > Change > selected Domain > type in `PROJECTAD.LOCAL` > Reboot
 - Login as `abrown` by selected "Other user"
@@ -197,6 +208,8 @@ sudo ./splunk enable boot-start -user splunk
 - Next, we will use Kali Linux to perform a Brute Force attack onto users
 - Then we will use Splunk to view telemetry for this activity
 - Set up and install Atomic Redteam to run a test
+
+### Simulating attacks using Kali Linux tools 
 
 - First, set Kali to
 - IP: `192.168.100.85`
@@ -260,6 +273,9 @@ crowbar -b rdp -u abrown -C passwords.txt -s 192.168.100.50/32
 
 <!--( SHOW SCREEN SHOT OF RESULT OF SUCCESSFUL BRUTE FORCE)-->
 
+
+###  Detecting and analyzing malicious activity using Splunk SIEM
+
 - We now go to Splunk and see what telemetry we have generated
 - Select "Search & Reporting"
 - We know that our attack is occurred within the past 15 minutes and knew the target, let's narrow down our search to find the events related to "abrown"
@@ -279,6 +295,9 @@ index="endpoint" abrown
 - If we look closely at the event, each of them happened at the same time which can be clear indication of Brute Force activity
 
 - Next we will install Atomic Red Team on our target machine then we can run some test on it
+
+ ### Atomic RedTeam to generate the attack
+ 
 - Open up PowerShell with administrator privileges
 
 ```
@@ -302,6 +321,8 @@ Invoke-AtomicTest T1136.001
 ```
 - This will automatically generate telemetry based on "Create local account"
 <!--Add pic-->
+
+###  Detecting and analyzing malicious activity using Splunk SIEM
 
 - Go to Splunk and try to check the events
 > [!NOTE]
